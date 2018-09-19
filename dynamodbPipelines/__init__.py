@@ -57,5 +57,8 @@ class DynamoDBPipeline(object):
         self.table.put_item(
             TableName=self.table_name,
             Item={k: self.encoder(v) for k, v in item.items()},
+            # TODO: add condintion extension, example is below
+            # ExpressionAttributeNames={"#name"  : "name",},
+            # ConditionExpression='attribute_not_exists(#name) AND attribute_not_exists(category)',
         )
         return item
